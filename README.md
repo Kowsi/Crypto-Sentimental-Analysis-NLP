@@ -36,6 +36,8 @@ Using natural language processing(NLP) to understand the sentiment in the latest
 
 - - -
 
+### Crypto Sentimental Analysis
+
 <details>
 <summary> <strong>Sentiment Analysis</strong> </summary><br>
 
@@ -48,14 +50,14 @@ Using natural language processing(NLP) to understand the sentiment in the latest
                                           language='en',
                                           sort_by='relevancy')
     ```
-2. `Descriptive statistics`
+2. **`Descriptive statistics`**
 
 Bitcoin         |  Ethereum 
 :----------------:|:----------------
 <img src="Images/senti_btc.png" width="600" /> |<img src="Images/senti_eth.png" width="600" />
 
 
-3. `Sentiment Score Analysis`
+3. **`Sentiment Score Analysis`**
     
 Using the above metrics to answer the following:
 
@@ -79,7 +81,7 @@ Using the above metrics to answer the following:
 <details>
 <summary> <strong>Natural Language Processing</strong> </summary><br>
 
-1. `Tokenization`
+1. **`Tokenization`**
 
     1. `Importing the required libraries from NLTK`
 
@@ -90,7 +92,7 @@ Using the above metrics to answer the following:
         from string import punctuation
         import re
         ```
-        <br/>
+        
     2. `Using NLTK and Python to tokenize the text for each coin`
     
         * Remove punctuation
@@ -100,30 +102,26 @@ Using the above metrics to answer the following:
             regex = re.compile("[^a-zA-Z0-9 ]")
             re_clean = regex.sub('', text)
         ```
-        <br/>
         * Lowercase each word and tokenize it
         
         ```python
             # Create a list of the words
             words = word_tokenize(re_clean.lower())
         ```
-        <br/>
         * Remove stop words
         
         ```python
             # Convert the words to lowercase and Remove the stop words
             words = [word for word in words if word not in stop_words]
         ```
-        <br/>
         * Lemmatize Words into Root words (eg: get = gets, got, getting)
         
         ```python
             # Lemmatize Words into root words
             root_words = [lemmatizer.lemmatize(word) for word in words]
         ```
-        <br/>
-    
-2. `Produce Ngrams and word frequency`
+   
+2. **`Produce Ngrams and word frequency`**
     
     * Produce the ngrams for two words (N=2)
     ```python
@@ -131,14 +129,16 @@ Using the above metrics to answer the following:
             words_count = dict(Counter(ngrams(tokens, n=N)))
             return words_count
     ```
-    <br/>
+    
     * List the top 10 words for each coin
-        Bitcoin         |  Ethereum 
-        :----------------:|:----------------
-         <img src="Images/wc_btc.png" width="200" /> |<img src="Images/wc_eth.png" width="200" />
     
-    
-3. `Generate word clouds for each coin to summarize the news for each coin`
+    Bitcoin         |  Ethereum 
+    :----------------:|:----------------
+     <img src="Images/wc_btc.png" width="200" /> |<img src="Images/wc_eth.png" width="200" />
+
+  
+  
+3. **`Generate word clouds for each coin to summarize the news for each coin`**
     
     ```python
         from wordcloud import WordCloud
@@ -167,7 +167,7 @@ Using the above metrics to answer the following:
 
 Here we build a named `entity recognition model` for both coins and visualize the tags using SpaCy.
 
-1. `Importing the required libraries from NLTK`
+1. **`Importing the required libraries from NLTK`**
 
     ```python
         import spacy
@@ -177,8 +177,8 @@ Here we build a named `entity recognition model` for both coins and visualize th
         # Load the spaCy model
         nlp = spacy.load('en_core_web_sm')
     ```
-    <br/>
-2. `Run a named entity recognition model for both coins`
+
+2. **`Run a named entity recognition model for both coins`**
     
     ```python
         # Run the NER processor on all of the text
@@ -187,8 +187,8 @@ Here we build a named `entity recognition model` for both coins and visualize th
         # Add a title to the document
         doc.user_data["title"] = "Bitcoin NER"
     ```
-    <br/>
-3. `Visualize the tags using SpaCy`
+
+3. **`Visualize the tags using SpaCy`**
     
     ```python
         # Render the visualization
@@ -200,13 +200,13 @@ Here we build a named `entity recognition model` for both coins and visualize th
 
 ![eth-ner.png](Images/displacy_ETH.png)
 
-4. `List all Entities`
+4. **`List all Entities`**
 
     ```python
         for ent in doc.ents:
             print('{} {}'.format(ent.text, ent.label_))
     ```
-    <br/>
+
     ```
         J.K. Rowling PERSON
         Bitcoin GPE
